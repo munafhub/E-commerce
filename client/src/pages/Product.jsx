@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../api";
 import { useCart } from "../context/CartContext";
+import SafeImage from "../components/SafeImage";
 
 export default function Product() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function Product() {
 
   return (
     <section className="section product-page">
-      <img src={product.image} alt={product.name} />
+      <SafeImage src={product.image} alt={product.name} />
       <div>
         <Link className="muted" to="/shop">
           ← Back to shop

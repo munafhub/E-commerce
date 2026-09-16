@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import SafeImage from "../components/SafeImage";
 
 export default function Cart() {
   const { items, subtotal, setQty, remove } = useCart();
@@ -24,7 +25,7 @@ export default function Cart() {
         <h2>Bag</h2>
         {items.map((item) => (
           <div className="cart-row" key={item.productId}>
-            <img src={item.image} alt="" />
+            <SafeImage src={item.image} alt="" />
             <div>
               <h3>{item.name}</h3>
               <p>${item.price}</p>

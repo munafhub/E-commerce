@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api";
 import { useCart } from "../context/CartContext";
+import SafeImage from "../components/SafeImage";
 
 export default function Shop() {
   const [params, setParams] = useSearchParams();
@@ -62,7 +63,7 @@ export default function Shop() {
         {products.map((p) => (
           <article className="card" key={p.id}>
             <Link to={`/product/${p.id}`}>
-              <img src={p.image} alt={p.name} />
+              <SafeImage src={p.image} alt={p.name} />
             </Link>
             <div className="card-body">
               <p className="cat">{p.category}</p>

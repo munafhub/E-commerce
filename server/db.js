@@ -8,6 +8,28 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = path.join(__dirname, "data");
 const dbPath = path.join(dataDir, "db.json");
 
+// Category-aware fallback images so admin-added products get a fitting photo
+// even if the form is submitted without an image URL.
+const CATEGORY_IMAGES = {
+  Audio:      "/products/headphones.png",
+  Wearables:  "/products/smartwatch.png",
+  Computing:  "/products/keyboard.png",
+  Lifestyle:  "/products/backpack.png",
+  Home:       "/products/desklamp.png",
+  Apparel:    "/products/sneakers.png",
+  Books:      "/products/backpack.png",
+  Beauty:     "/products/bottle.png",
+  Sports:     "/products/sneakers.png",
+  Toys:       "/products/backpack.png",
+  Food:       "/products/bottle.png",
+  Gadgets:    "/products/webcam.png",
+};
+const DEFAULT_IMAGE = "/products/headphones.png";
+
+export function fallbackImageFor(category) {
+  return CATEGORY_IMAGES[category] || DEFAULT_IMAGE;
+}
+
 function seed() {
   const passwordHash = bcrypt.hashSync("demo123", 10);
   const adminHash = bcrypt.hashSync("admin123", 10);
@@ -40,8 +62,7 @@ function seed() {
         stock: 24,
         rating: 4.8,
         featured: true,
-        image:
-          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
+        image: "/products/headphones.png",
         description:
           "Over-ear cans with 40 hours of battery, spatial audio, and a whisper-quiet ANC profile for travel and studio work.",
       },
@@ -53,8 +74,7 @@ function seed() {
         stock: 18,
         rating: 4.6,
         featured: true,
-        image:
-          "https://images.unsplash.com/photo-1523275335680-378e8ba495df?auto=format&fit=crop&w=900&q=80",
+        image: "/products/smartwatch.png",
         description:
           "AMOLED display, GPS, sleep coaching, and 5-day battery in a brushed aluminum case.",
       },
@@ -66,8 +86,7 @@ function seed() {
         stock: 31,
         rating: 4.9,
         featured: true,
-        image:
-          "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=80",
+        image: "/products/keyboard.png",
         description:
           "Hot-swap switches, gasket mount, and southpaw layout with RGB that stays out of the way.",
       },
@@ -79,8 +98,7 @@ function seed() {
         stock: 40,
         rating: 4.5,
         featured: false,
-        image:
-          "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80",
+        image: "/products/backpack.png",
         description:
           "Waxed canvas 22L pack with a padded laptop sleeve and hidden passport pocket.",
       },
@@ -92,8 +110,7 @@ function seed() {
         stock: 27,
         rating: 4.4,
         featured: false,
-        image:
-          "https://images.unsplash.com/photo-1507473882602-a6c4c2c0e8b0?auto=format&fit=crop&w=900&q=80",
+        image: "/products/desklamp.png",
         description:
           "Warm-to-cool LED with USB-C charging and a matte steel arm that holds any angle.",
       },
@@ -105,8 +122,7 @@ function seed() {
         stock: 80,
         rating: 4.7,
         featured: false,
-        image:
-          "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=80",
+        image: "/products/bottle.png",
         description:
           "32oz double-wall steel that keeps drinks cold for 24 hours. Leak-proof, dishwasher safe.",
       },
@@ -118,8 +134,7 @@ function seed() {
         stock: 15,
         rating: 4.3,
         featured: true,
-        image:
-          "https://images.unsplash.com/photo-1587826080692-b5d4d0fd7d2d?auto=format&fit=crop&w=900&q=80",
+        image: "/products/webcam.png",
         description:
           "Sony sensor, hardware HDR, and a magnetic privacy shutter for daily standups.",
       },
@@ -131,8 +146,7 @@ function seed() {
         stock: 22,
         rating: 4.6,
         featured: false,
-        image:
-          "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
+        image: "/products/sneakers.png",
         description:
           "Recycled knit upper, cloud foam midsole, and a gum outsole that actually grips wet pavement.",
       },

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loadDb, saveDb, newId } from "../db.js";
+import { loadDb, saveDb, newId, fallbackImageFor } from "../db.js";
 import { requireAuth, requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
@@ -49,7 +49,7 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
     featured: Boolean(featured),
     image:
       image ||
-      "https://images.unsplash.com/photo-1523275335680-378e8ba495df?auto=format&fit=crop&w=900&q=80",
+      fallbackImageFor(category),
     description: description || "",
   };
   db.products.push(product);

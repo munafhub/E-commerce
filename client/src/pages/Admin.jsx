@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
+import SafeImage from "../components/SafeImage";
 
 const empty = {
   name: "",
@@ -101,7 +102,7 @@ export default function Admin() {
         <h2>Inventory</h2>
         {products.map((p) => (
           <div className="cart-row" key={p.id}>
-            <img src={p.image} alt="" />
+            <SafeImage src={p.image} alt="" />
             <div>
               <h3>{p.name}</h3>
               <p className="muted">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { useCart } from "../context/CartContext";
+import SafeImage from "../components/SafeImage";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,7 @@ export default function Home() {
         </div>
         <div className="hero-panel">
           <img
-            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
+            src="/products/headphones.png"
             alt="Featured headphones"
           />
         </div>
@@ -50,7 +51,7 @@ export default function Home() {
           {products.map((p) => (
             <article className="card" key={p.id}>
               <Link to={`/product/${p.id}`}>
-                <img src={p.image} alt={p.name} />
+                <SafeImage src={p.image} alt={p.name} />
               </Link>
               <div className="card-body">
                 <p className="cat">{p.category}</p>
